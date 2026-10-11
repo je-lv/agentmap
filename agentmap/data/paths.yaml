@@ -1,0 +1,16 @@
+# Discovery paths. The A2A spec (section 8.2) names /.well-known/agent-card.json;
+# agent.json is the legacy name used by early drafts and older deployments.
+a2a:
+  card_paths:
+    - /.well-known/agent-card.json
+    - /.well-known/agent.json
+mcp:
+  endpoint_paths:
+    - /mcp
+    - /sse
+    - /
+  oauth_resource_path: /.well-known/oauth-protected-resource
+  fingerprints:
+    - path: /
+      body_contains: MCP Inspector
+      product: MCP Inspector

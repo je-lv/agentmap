@@ -1,0 +1,13 @@
+# Port presets, parsed by targets.parse_ports. Keep each port tied to a named
+# default in the comment so the list can be audited.
+presets:
+  # 80/443 generic web; 3000 Node dev servers (Next.js, Create React App) and
+  # agent-builder UIs such as Flowise; 4000 LiteLLM proxy; 5000 Flask; 5678
+  # n8n; 6274 MCP Inspector web UI (the v1 proxy on 6277 was removed in the
+  # current MCP Inspector v2 release, so it is not listed); 6275 MCP Inspector
+  # v2 MCP Apps sandbox server; 7860 Gradio; 8000-8010 uvicorn/FastAPI and the
+  # range the original script used; 8080/8081/8443 alt HTTP(S); 8501 Streamlit;
+  # 8888 Jupyter; 10000 several official A2A samples (langgraph,
+  # azure-ai-foundry, java dice-agent); 11434 Ollama.
+  agent-default: "80,443,3000,4000,5000,5678,6274,6275,7860,8000-8010,8080,8081,8443,8501,8888,10000,11434"
+  web: "80,443,8080,8443"

@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentmap"
+dynamic = ["version"]
+description = "Black-box discovery and risk assessment for A2A and MCP agent endpoints"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "je-lv"}]
+keywords = ["security", "reconnaissance", "scanner", "pentest", "mcp", "a2a", "ai-agents"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security",
+]
+dependencies = [
+  "httpx>=0.27,<1",
+  "Jinja2>=3.1,<4",
+  "PyYAML>=6,<7",
+  "rich>=13,<15",
+]
+
+[project.urls]
+Homepage = "https://github.com/je-lv/agentmap"
+Repository = "https://github.com/je-lv/agentmap"
+Issues = "https://github.com/je-lv/agentmap/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+agentmap = "agentmap.app:run_cli"
+
+[tool.setuptools.dynamic]
+version = {attr = "agentmap.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["agentmap*"]
+
+[tool.setuptools.package-data]
+agentmap = ["data/*.yaml", "report/templates/*.j2"]

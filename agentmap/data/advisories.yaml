@@ -1,0 +1,6 @@
+# Curated advisories matched against the server name and version reported in the
+# MCP initialize result. Add an entry only after reading the advisory page and
+# confirming the affected range and fixed version. Schema per entry:
+#   id, product (regex on serverInfo.name), affected_below, fixed_in,
+#   reference (https URL), summary
+[]

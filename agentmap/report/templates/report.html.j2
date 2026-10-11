@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>agentmap report</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; margin: 2rem;
+         background: #0a0a0f; color: #e0e0e0; }
+  h1 { color: #00f0ff; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #1a1a25; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+  th { background: #1a1a25; }
+  .sev-critical { color: #ff3366; font-weight: bold; }
+  .sev-high { color: #ff6b4a; }
+  .sev-medium { color: #ff9500; }
+  .sev-low { color: #a855f7; }
+  .sev-info { color: #888; }
+  .meta { color: #8a8a9a; margin: 0.2rem 0 0.9rem; }
+  .sevbar { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1.4rem; }
+  .chip { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.22rem 0.7rem;
+          border: 1px solid currentColor; border-radius: 999px; font-size: 0.82rem;
+          text-transform: uppercase; letter-spacing: 0.04em; }
+  .chip b { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .chip-critical { color: #ff3366; }
+  .chip-high { color: #ff6b4a; }
+  .chip-medium { color: #ff9500; }
+  .chip-low { color: #a855f7; }
+  .chip-info { color: #8a8a9a; }
+  .chip-zero { opacity: 0.3; }
+</style>
+</head>
+<body>
+<h1>agentmap report</h1>
+<p class="meta">Level: {{ manifest.get("level", "") }} &middot; Total findings: {{ summary.total }}</p>
+<div class="sevbar">
+{% for sev in severities|reverse %}
+  <span class="chip chip-{{ sev }}{% if not summary.by_severity[sev] %} chip-zero{% endif %}"><b>{{ summary.by_severity[sev] }}</b> {{ sev }}</span>
+{% endfor %}
+</div>
+<table>
+<thead><tr><th>Severity</th><th>Rule</th><th>Finding</th><th>Target</th><th>Evidence</th></tr></thead>
+<tbody>
+{% for f in findings %}
+<tr>
+  <td class="sev-{{ f.severity }}">{{ f.severity }}</td>
+  <td>{{ f.rule_id }}</td>
+  <td>{{ f.title }}</td>
+  <td>{{ f.target }}</td>
+  <td>{{ f.detail }}</td>
+</tr>
+{% else %}
+<tr><td colspan="5">no findings</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</body>
+</html>
